@@ -1,3 +1,14 @@
 h1 {
-  color: purple;
+  color: teal;
+  text-align: center;
+}
+
+input {
+  width: 300px;
+  display: block;
+  margin: auto;
+}
+
+#printedList {
+  text-align: center;
 }
