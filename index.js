@@ -1,25 +1,34 @@
 
+let removedItems = JSON.parse(localStorage.getItem('removedItems')) || [];
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('listItems')) {
     listItems = JSON.parse(localStorage.getItem('listItems'));
   }
   displayList();
+  displayRemovedList();
 });
-const theForm = document.querySelector('form');
+
+const theForm = document.querySelector('#form1');
 const inputField = document.querySelector('#input');
 const addButton = document.querySelector('#button');
 const listBox = document.querySelector('#printedList');
+const removedListBox = document.querySelector('#removedList')
 theForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const newItem = inputField.value;
   if (newItem !== '') {
-    listItems = JSON.parse(localStorage.getItem('listItems')) || [];
-    listItems.push(newItem);
-    localStorage.setItem('listItems', JSON.stringify(listItems));
-    displayList();
+    if (listItems.includes(newItem)) {
+      removeItem(newItem);
+    } else {
+      listItems = JSON.parse(localStorage.getItem('listItems')) || [];
+      listItems.push(newItem);
+      localStorage.setItem('listItems', JSON.stringify(listItems));
+      displayList();
+    }
     inputField.value = '';
   }
 });
+
 const displayList = () => {
   listBox.innerHTML = '';
   listItems.forEach((item) => {
@@ -29,137 +38,51 @@ const displayList = () => {
   });
 };
 
-// const inForm = document.querySelector('form');
-// const inputField = document.querySelector('#input');
-// const addButton = document.querySelector('#button');
-// const listBox = document.querySelector('#printedList');
-// inForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   const newItem = inputField.value;
-//   if (newItem !== '') {
-//     const listItem = document.createElement('li');
-//     listItem.textContent = newItem;
-//     listBox.appendChild(listItem);
-//     listItems.push(newItem);
-//     localStorage.setItem('listItems', JSON.stringify(listItems));
-//     inputField.value = '';
-//   }
-// });
+const removeItem = (itemToRemove) => {
+  listItems = listItems.filter((item) => item !== itemToRemove);
+  removedItems.push(itemToRemove);
+  localStorage.setItem('listItems', JSON.stringify(listItems));
+  localStorage.setItem('removedItems', JSON.stringify(removedItems));
+  displayRemovedList();
+  displayList();
+};
+
+const displayRemovedList = () => {
+  removedListBox.innerHTML = '';
+  removedItems.forEach((item) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = item;
+    removedListBox.appendChild(listItem);
+  });
+}
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   if (localStorage.getItem('listItems')) {
 //     listItems = JSON.parse(localStorage.getItem('listItems'));
-//     listItems.forEach((item) => {
-//       const listItem = document.createElement('li');
-//       listItem.textContent = item;
-//       listBox.appendChild(listItem);
-//     });
+//   }
+//   displayList();
+// });
+// const theForm = document.querySelector('form');
+// const inputField = document.querySelector('#input');
+// const addButton = document.querySelector('#button');
+// const listBox = document.querySelector('#printedList');
+// theForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   const newItem = inputField.value;
+//   if (newItem !== '') {
+//     listItems = JSON.parse(localStorage.getItem('listItems')) || [];
+//     listItems.push(newItem);
+//     localStorage.setItem('listItems', JSON.stringify(listItems));
+//     displayList();
+//     inputField.value = '';
 //   }
 // });
-
-
-// Check if there are any stored list items
-// if (localStorage.getItem("listItems")) {
-//   listItems = JSON.parse(localStorage.getItem("listItems"));
-// }
-// // Call displayList when the page loads
-// displayList();
-// const addToList = () => {
-//   const input = document.getElementById("input");
-//   const list = document.getElementById("printedList");
-//   if (input.value !== "") {
-//     const newItem = {
-//       text: input.value
-//     };
-//     listItems.push(newItem);
-//     localStorage.setItem("listItems", JSON.stringify(listItems));
-//     displayList(); // Call displayList after adding a new item
-//     input.value = "";
-//   }
-// };
 // const displayList = () => {
-//   const list = document.getElementById("printedList");
-//   list.innerHTML = "";
+//   listBox.innerHTML = '';
 //   listItems.forEach((item) => {
-//     const listItem = document.createElement("li");
-//     listItem.textContent = item.text;
-//     list.appendChild(listItem);
+//     const listItem = document.createElement('li');
+//     listItem.textContent = item;
+//     listBox.appendChild(listItem);
 //   });
 // };
-// document.getElementById("button").addEventListener("click", addToList);
 
-// Check if there are any stored list items
-// if (localStorage.getItem("listItems")) {
-//   listItems = JSON.parse(localStorage.getItem("listItems"));
-//   displayList();
-// }
-// const addToList = () => {
-//   const input = document.getElementById("input");
-//   const list = document.getElementById("printedList");
-//   if (input.value !== "") {
-//     const newItem = {
-//       text: input.value
-//     };
-//     listItems.push(newItem);
-//     localStorage.setItem("listItems", JSON.stringify(listItems));
-//     displayList(); // Call displayList after adding a new item
-//     input.value = "";
-//   }
-// };
-// const displayList = () => {
-//   const list = document.getElementById("printedList");
-//   list.innerHTML = "";
-//   listItems.forEach((item) => {
-//     const listItem = document.createElement("li");
-//     listItem.textContent = item.text;
-//     list.appendChild(listItem);
-//   });
-// };
-// document.getElementById("button").addEventListener("click", addToList);
-
-// Check if there are any stored list items
-// if (localStorage.getItem("listItems")) {
-//   listItems = JSON.parse(localStorage.getItem("listItems"));
-//   displayList();
-// }
-// const addToList = () => {
-//   const input = document.getElementById("input");
-//   const list = document.getElementById("printedList");
-//   if (input.value !== "") {
-//     const newItem = {
-//       text: input.value
-//     };
-//     listItems.push(newItem);
-//     localStorage.setItem("listItems", JSON.stringify(listItems));
-//     const listItem = document.createElement("li");
-//     listItem.textContent = input.value;
-//     list.appendChild(listItem);
-//     input.value = "";
-//   }
-// };
-// const displayList = () => {
-//   const list = document.getElementById("printedList");
-//   list.innerHTML = "";
-//   listItems.forEach((item) => {
-//     const listItem = document.createElement("li");
-//     listItem.textContent = item.text;
-//     list.appendChild(listItem);
-//   });
-// };
-// document.getElementById("button").addEventListener("click", addToList);
-
-// const addToList = () => {
-//   const input = document.getElementById("input");
-//   const list = document.getElementById("printedList");
-//   if (input.value !== "") {
-//     const newItem = document.createElement("li");
-//     newItem.textContent = input.value;
-//     list.appendChild(newItem);
-//     input.value = "";
-//   }
-// };
-// document.getElementById("button").addEventListener("click", addToList);
-
-
-// let btn = document.querySelector('#button');
-// btn.addEventListener("click", () => alert('Button was clicked'));

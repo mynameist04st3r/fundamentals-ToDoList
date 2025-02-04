@@ -12,3 +12,9 @@ input {
 #printedList {
   text-align: center;
 }
+
+#removedList {
+  text-align: right;
+  vertical-align: bottom;
+  text-decoration: line-through;
+}
