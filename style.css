@@ -10,15 +10,18 @@ input {
 }
 
 #printedList {
-  text-align: center;
+  text-align: left;
 }
 
 #removedList {
-  text-align: right;
-  vertical-align: bottom;
+  text-align: left;
   text-decoration: line-through;
 }
 
 h4 {
   text-align: center;
+}
+
+#table {
+  margin: 0px auto;
 }
