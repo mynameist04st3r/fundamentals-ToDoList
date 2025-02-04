@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   displayRemovedList();
 });
 
+let listItems = [];
 const theForm = document.querySelector('#form1');
 const inputField = document.querySelector('#input');
 const addButton = document.querySelector('#button');
