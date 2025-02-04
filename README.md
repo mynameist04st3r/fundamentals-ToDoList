@@ -1,1 +1,3 @@
 # fundamentals-ToDoList
+
+This simple webapp allows a user to input tasks into a text field, one-by-one, and create a To-Do List.  The list is ordered from top to bottom according to the order in which each task is entered.  As the user completes tasks on the To-Do List, each of those completed tasks can be entered into the text field again which will remove the task from the To-Do List and add it to a completed task list.  There is no limit to the number of tasks that can be added, and old tasks can be added back in to the To-Do List by simply typing them in again.  This will not, however, remove any tasks from the completed task list.
